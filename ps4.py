@@ -389,7 +389,7 @@ class ResistantBacteria(SimpleBacteria):
                 bacteria cell. This is the maximum probability of the
                 offspring acquiring antibiotic resistance
         """
-        SimpleBacteria.__init__(self, birth_prob, death_prob)
+        super().__init__(self, birth_prob, death_prob)
         self._resistant = resistant
         self._mut_prob = mut_prob
 
@@ -409,7 +409,7 @@ class ResistantBacteria(SimpleBacteria):
             bool: True if the bacteria dies with the appropriate probability
                 and False otherwise.
         """
-        pass  # TODO
+        pass # TODO
 
     def reproduce(self, pop_density):
         """
