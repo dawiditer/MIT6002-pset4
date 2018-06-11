@@ -149,8 +149,7 @@ class SimpleBacteria(object):
         """
         if random.random() < self._birth_prob * (1 - pop_density):
             return SimpleBacteria(self._birth_prob, self._death_prob)
-        else:
-            raise NoChildException
+        raise NoChildException
 
 class Patient(object):
     """
