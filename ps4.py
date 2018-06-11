@@ -395,7 +395,7 @@ class ResistantBacteria(SimpleBacteria):
 
     def get_resistant(self):
         """Returns whether the bacteria has antibiotic resistance"""
-        pass  # TODO
+        return self._resistant
 
     def is_killed(self):
         """Stochastically determines whether this bacteria cell is killed in
