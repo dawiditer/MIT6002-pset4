@@ -409,7 +409,12 @@ class ResistantBacteria(SimpleBacteria):
             bool: True if the bacteria dies with the appropriate probability
                 and False otherwise.
         """
-        pass # TODO
+        return super().is_killed() if self.get_resistant() \
+            else random.random() < (self._death_prob/4)
+#        if self.get_resistant():
+#            return super().is_killed()
+#        
+#        return random.random() < (self._death_prob / 4)
 
     def reproduce(self, pop_density):
         """
