@@ -88,7 +88,17 @@ class SimpleBacteria(object):
                 probability
             death_prob (float in [0, 1]): Maximum death probability
         """
-        pass  # TODO
+        self._birth_prob = birth_prob
+        self._death_prob = death_prob
+        
+        self._check_rep
+        
+    def _check_rep(self):
+        """
+        Ensures the representation invariant is not violated
+        """
+        assert 0 <= self._birth_prob <= 1
+        assert 0 <= self._death_prob <= 1
 
     def is_killed(self):
         """
