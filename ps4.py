@@ -147,8 +147,10 @@ class SimpleBacteria(object):
         Raises:
             NoChildException if this bacteria cell does not reproduce.
         """
-        pass  # TODO
-
+        if random.random() < self._birth_prob * (1 - pop_density):
+            return SimpleBacteria(self._birth_prob, self._death_prob)
+        else:
+            raise NoChildException
 
 class Patient(object):
     """
