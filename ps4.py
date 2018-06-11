@@ -278,11 +278,35 @@ def simulation_without_antibiotic(num_bacteria,
         populations (list of lists or 2D array): populations[i][j] is the
             number of bacteria in trial i at time step j
     """
-    pass  # TODO
+    #simulate numTrials and collect the populations for each trial
+    populations = []
+    for _ in range(num_trials):
+        #single trial
+        # instantiate a list of bacteria
+        bacteria = [SimpleBacteria(birth_prob, death_prob) for _ in range(num_bacteria)]
+        # instantiate a Patient
+        patient = Patient(bacteria, max_pop)
+        # simulate changes to the bacteria population over 300 timesteps
+        ## start from timestep 0
+        popPerTimestep = [patient.get_total_pop()]
+        ## for each timestep update the bacteria population in patient
+        popPerTimestep = popPerTimestep + [patient.update() for _ in range(1, 300)]
+        
+        populations.append(popPerTimestep)
+    #plot the average bacteria pop size
+    ##get the average population sizes for each timestep
+    avg_pop_sizes_per_trial = [calc_pop_avg(populations, n) for n in range(300)]
+    elapsed_timesteps = [n for n in range(300)]
+    
+    make_one_curve_plot(elapsed_timesteps, avg_pop_sizes_per_trial,
+                        "Time steps",
+                        "Bacteria population size",
+                        "Without Antibiotic")
+    return populations
 
 
 # When you are ready to run the simulation, uncomment the next line
-# populations = simulation_without_antibiotic(100, 1000, 0.1, 0.025, 50)
+populations = simulation_without_antibiotic(100, 1000, 0.1, 0.025, 50)
 
 ##########################
 # PROBLEM 3
@@ -522,23 +546,23 @@ def simulation_with_antibiotic(num_bacteria,
     pass  # TODO
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 #    random.seed(0)
-    b1 = SimpleBacteria(1.0, 1.0)
-    assert b1.is_killed()
-    try:
-        c1 = b1.reproduce(0.0)
-    except NoChildException:
-        c1 = None    
-    assert c1 != None
-    
-    b2 = SimpleBacteria(0.0, 0.0)
-    assert not b2.is_killed()
-    try:
-        c2 = b2.reproduce(0.1)
-    except NoChildException:
-        c2 = None
-    assert c2 == None
+#    b1 = SimpleBacteria(1.0, 1.0)
+#    assert b1.is_killed()
+#    try:
+#        c1 = b1.reproduce(0.0)
+#    except NoChildException:
+#        c1 = None    
+#    assert c1 != None
+#    
+#    b2 = SimpleBacteria(0.0, 0.0)
+#    assert not b2.is_killed()
+#    try:
+#        c2 = b2.reproduce(0.1)
+#    except NoChildException:
+#        c2 = None
+#    assert c2 == None
 # When you are ready to run the simulations, uncomment the next lines one
 # at a time
 #total_pop, resistant_pop = simulation_with_antibiotic(num_bacteria=100,
