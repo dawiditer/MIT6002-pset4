@@ -368,6 +368,9 @@ def calc_95_ci(populations, t):
     
     return sampleMean, 1.96*SEM
 
+#populations = simulation_without_antibiotic(100, 1000, 0.1, 0.025, 50)
+#mean, width = calc_95_ci(populations, 299)
+#print("mean:", mean, "\nwidth:", width)
 
 ##########################
 # PROBLEM 4

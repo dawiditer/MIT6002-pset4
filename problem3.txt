@@ -1,0 +1,4 @@
+mean: 759.08 
+width: 4.040392510041568
+
+confidence interval 755.04 - 763.12 
