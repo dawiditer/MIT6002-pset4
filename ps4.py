@@ -164,7 +164,8 @@ class Patient(object):
             max_pop (int): Maximum possible bacteria population size for
                 this patient
         """
-        pass  # TODO
+        self._bacteria = bacteria
+        self._max_pop = max_pop
 
     def get_total_pop(self):
         """
