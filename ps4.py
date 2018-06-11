@@ -473,14 +473,15 @@ class TreatedPatient(Patient):
         Don't forget to call Patient's __init__ method at the start of this
         method.
         """
-        pass  # TODO
+        super().__init__(self, bacteria, max_pop)
+        self._on_antibiotic = False
 
     def set_on_antibiotic(self):
         """
         Administer an antibiotic to this patient. The antibiotic acts on the
         bacteria population for all subsequent time steps.
         """
-        pass  # TODO
+        self._on_antibiotic = True
 
     def get_resist_pop(self):
         """
@@ -489,7 +490,17 @@ class TreatedPatient(Patient):
         Returns:
             int: the number of bacteria with antibiotic resistance
         """
-        pass  # TODO
+        resist_pop = 0
+        for bacterium in self._bacteria:
+            if bacterium.get_resistant():
+                resist_pop += 1
+                
+        return resist_pop
+        #TODO: how to reduce an iterable to the length of its items
+        #am guessing there isn't one because they might be generators
+        #(filter(ResistantBacteria.get_resistant, self._bacteria)
+        #IF thinking about efficiency, you could cache the initial size
+        #and keep track of all changes by adding/subtracting
 
     def update(self):
         """
@@ -516,7 +527,25 @@ class TreatedPatient(Patient):
         Returns:
             int: The total bacteria population at the end of the update
         """
-        pass  # TODO
+        #find survivors
+        def _survives(b):
+            will_resist = False if self._on_antibiotics and not b.get_resistant() else True
+            return (not b.is_killed()) and will_resist
+        
+        survivors = [b for b in self._bacteria if _survives(b)]
+        popDensity = len(survivors)/float(self._max_pop)
+        
+        children = []
+        for bacterium in survivors:
+            try:
+                child = bacterium.reproduce(popDensity)
+                children.append(child)
+            except NoChildException:
+                continue
+            
+        self._bacteria = survivors + children
+
+        return self.get_total_pop()
 
 
 ##########################
