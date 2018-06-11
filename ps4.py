@@ -306,7 +306,7 @@ def simulation_without_antibiotic(num_bacteria,
 
 
 # When you are ready to run the simulation, uncomment the next line
-populations = simulation_without_antibiotic(100, 1000, 0.1, 0.025, 50)
+#populations = simulation_without_antibiotic(100, 1000, 0.1, 0.025, 50)
 
 ##########################
 # PROBLEM 3
@@ -333,8 +333,13 @@ def calc_pop_std(populations, t):
         float: the standard deviation of populations across different trials at
              a specific time step
     """
-    pass  # TODO
-
+    #calculate the mean population at timestep t
+    popMean = calc_pop_avg(populations, t)
+    #find the variance
+    variance = sum([(trial[t] - popMean)**2 for trial in populations])/len(populations)
+    
+    #return the standard deviation
+    return math.sqrt(variance)
 
 def calc_95_ci(populations, t):
     """
