@@ -1,0 +1,7 @@
+Simulation A
+Total Pop.:  mean = 195.02 width =  8.52 CI = 186.49 - 203.54
+Resistant Pop.: mean =  195.02 width =  8.52 CI = 186.49 - 203.54
+
+Simulation B
+Total Pop.:  mean = 0.0 width =  0.0 CI =  0.0
+Resistant Pop.: mean =  0.0 width =  0.0 CI =  0.0 
