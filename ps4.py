@@ -109,7 +109,17 @@ class SimpleBacteria(object):
         Returns:
             bool: True with probability self.death_prob, False otherwise.
         """
-        pass  # TODO
+        #Pseudocode
+        # Get a random value between 0 and 1
+        # Check if that value lies within the given probability, using the
+        # area  of an object idea, a random value will fall either in or out
+        # of the probability
+        
+        return random.random() < self._death_prob
+        
+        #NB: random.random()'s interval is [0,1). Since 1 is not included,
+        #we use random < prob instead of random <= prob. This way the probability
+        #is 'evened out'
 
     def reproduce(self, pop_density):
         """
